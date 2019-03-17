@@ -1,0 +1,60 @@
+\chapter{Preliminaries}\label{chap:Prelimi}
+\section{Time series}
+\label{sec:time_series}
+The airport data we will be working with consists of readings from multiple sensors strategically located throughout a selected region of the airport. Therefore, in order to model a single individual in the raw data, we will use multivariate time series. \\
+
+In our case, a passenger is the same as a mobile device, and a mobile device is characterised by its address. We will therefore use the terms "passenger", "mobile device" and "mobile address" interchangeably. \\
+
+
+We define our sensor time series as
+
+\begin{align*}
+	X_{i,j} = \langle (t_1, c_1), (t_2, c_2), \cdots, (t_n, c_n)\rangle,
+\end{align*}
+
+where
+
+\begin{itemize}
+	\item $i$ is the index of the mobile address
+	\item $j$ is the index of the sensor
+	\item $n$ is the count of measurements of the $i$-th mobile device taken by the $j$-th sensor
+	\item $c_k$ is the signal strength at time $t_k$, where $1 \leq k \leq n$
+\end{itemize}
+
+Since each mobile device is recorded by multiple sensors, we need to model each mobile device as a multivariate time series, which we define as:
+
+\begin{align*}
+	\mathcal{X}_i = (X_{i,1}, X_{i,2}, \cdots, X_{i,m})
+\end{align*}
+
+\pagebreak
+
+where
+
+\begin{itemize}
+	\item $i$ is the index of the mobile device
+	\item $X_{i,1}, \cdots, X_{i,m}$ are the sensor time-series for the $i$-th device
+	\item $m$ is the number of sensors
+\end{itemize}
+
+\section{Problem definition}
+
+The project objective is to find a model that includes and describes all the information about a passenger and use it together with machine learning techniques to assign a passenger to a class label.\\
+The existing data were modelled in \cref{sec:time_series} in terms of multivariate time series:
+\begin{align*}
+	\mathcal{X}_i = (X_{i,1}, X_{i,2}, \cdots, X_{i,m})
+\end{align*}
+
+Now, the set of labels $l = \{\text{manual},\ \text{staff},\ \text{no-q},\ \text{privium}\}$ can be introduced, where
+
+\begin{itemize}
+	\item \textit{manual} is a standard passenger
+	\item \textit{staff} is a member of the airport staff
+	\item \textit{no-q} is a passenger that can use electronic passport control
+	\item \textit{privium} is a passenger with priority pass
+\end{itemize}
+
+Further, L = $\{(\mathcal{X}_1, l_1),(\mathcal{X}_2, l_2), \cdots, (\mathcal{X}_n, l_n)\}$ defines a set of passengers with the corresponding labels $\{l_1, l_2, \cdots, l_n \} \in l$.\\
+
+
+Given a set of passengers $\{(\mathcal{X}_{n+1}, l_{n+1}), \cdots, (\mathcal{X}_{n+m},l_{n+m}) \}$ with unobserved labels $\{l_{n+1}, \cdots, l_{n+m} \}$, the aim is to assign one of the defined labels from $l$ to each label from unobserved labels set. 

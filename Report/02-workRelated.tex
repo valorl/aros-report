@@ -1,0 +1,71 @@
+\chapter{Related Work}
+\label{chap:RelWork}
+\section{Overview}
+\par
+In general, machine learning tasks can be divided into supervised and unsupervised learning. In supervised learning, new data can be analysed based on previous experience, while unsupervised learning does not rely on prior information about labels for its processes. Given the scenario described, classification of a passenger is variable dependent on other provided information, we can safely state that we are facing a supervised learning task.\\
+
+\par
+Furthermore, supervised learning covers two classes of problems - classification and regression. When classifying, the task is to identify a group in which a new observation should belong. On the other hand, regression aims to determine a value on a continuous scale from given data. 
+
+\section{Classification}
+Since this project is concerned with categorising mobile devices (passengers/individuals) into different classes, our activities and experiments will naturally fall under classification. 
+
+\par
+For an overview of classification, the following is a short description of a few commonly used methods.
+
+\subsection{\texorpdfstring{$k$NN}{kNN}}
+The $k$-nearest-neighbours algorithm ($k$NN) is an intuitive machine learning method used for both classification and regression in multidimensional feature space. The label of the data to be classified is propagated from its $k$ nearest labelled data points. This depends on the chosen distance measure.\\
+
+\par
+More precisely, given a distance measure, the distances between every pair of points are calculated. When a new point is observed, it is assigned a label according to the majority of votes of the $k$ nearest points, where $k$ is a user-defined constant. Note that a larger $k$ generally reduces the effect of noise, but yields less distinct label groups.\\
+
+\subsection{Perceptron}
+The perceptron is a linear classifier used to determine a (binary) class of a vector. A Perceptron calculates the inner product of its $n$ weights and the $n$ dimensional input vector, adds a weighted bias to adjust the $y$ intercept of the linear separation line, and puts the result into a transfer function, ensuring that the result is binary. The weights are usually initialised as small random values and are iteratively adjusted during training to linearly separate the two classes.
+
+\subsection{Naive Bayes}
+Naive Bayes is a probabilistic classifier based on Bayes' theorem. The probabilities of each class are derived from the training data features usually using the maximum likelihood method, assuming independence between features. To classify unobserved data, probabilities of each class given input data features are calculated, and the most probable class is selected as the label.
+
+\subsection{Recurrent neural network}
+Recurrent neural network is a class of artificial neural networks that, in contrary to feed-forward neural networks, takes in account the internal state of a neuron, making it more suitable for time series processing.\\
+
+\par
+A fully recurrent neural network contains multiple layers of neurons, where each neuron is connected to every neuron of the successive layer, where each connection has a real-valued weight. The input layer consists of $n$ neurons, where $n$ is the number of features of the data. Training consists of presenting the selected $m \times n$ data to the network, where $n$ is the number of features and $m$ is the length of sequences, and its label. Throughout the training process, weights are adjusted to reflect the class separation. When unobserved data are presented, the correct label is determined from the previously calculated weights.
+
+
+%\begin{example}
+%	To obtain a better understanding of the $k$NN algorithm, consider the following dataset.
+%	\begin{figure}[H]
+%		\centering
+%		\begin{tabular}{|c|c|}\hline
+%			\textbf{Point} & \textbf{Label} \\ \hline
+%			$(4,5)$ & 1 \\
+%			$(3,4)$ & 1 \\
+%			$(2,1)$ & 0 \\
+%			$(3,3)$ & 0 \\
+%			$(1,2)$ & 0 \\
+%			$(4,3)$ & ? \\ \hline
+%		\end{tabular}
+%	\end{figure}
+%	
+%	In order to determine the label of $(4,3)$, it is required to calculate its distances to the labelled points. Using Euclidean distance measure, we obtain the following values.
+%	
+%	\begin{figure}[H]
+%		\centering
+%		\begin{tabular}{|c|c|}\hline
+%			\textbf{Point} & \textbf{Distance} \\ \hline
+%			$(4,5)$ & $2$ \\
+%			$(3,4)$ & $\sqrt{2}$ \\
+%			$(2,1)$ & $2\sqrt{2}$ \\
+%			$(3,3)$ & $1$ \\
+%			$(3,2)$ & $\sqrt{10}$ \\ \hline
+%		\end{tabular}
+%	\end{figure}
+%	
+%	Predicted labels can differ by the choice of $k$ to be used. Low values tend to lead to over-fitting while big values tend to lead to under-fitting. For the sake of demonstration, we will use $3$NN without deeper analysis of the data. The point $(4,3)$ will be then assigned a label based on labels of his three nearest neighbours, which are the points $(3,3)$, $(3,4)$ and $(4,5)$, carrying labels 0, 1 and 1. The label of $(4,3)$ will therefore be predicted to be 1.
+%\end{example}
+\bigskip
+A similar task has already been handled in \cite{PredictingUserMovements} where authors use Recurrent Neural Network to predict the movement of an individual, reaching up to 90\% prediction accuracy. Note that the dataset used for this experiment was created for the sole purpose of testing the used method. Therefore the recorded measurements are not as sparse as in a real-life scenario and allow much more effective learning.\\
+
+\par
+Aside from RNNs, Convolutional Neural Networks have also been exploited for multivariate time series classification \cite{CNNTimeSeriesPred, Yang2015DeepCN}, offering us multiple approaches to our problem.\\
+
